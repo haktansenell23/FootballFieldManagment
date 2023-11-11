@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="mainModule">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - FootballFieldManagmentAngularJS</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/FootballFieldManagmentAngularJS.styles.css" asp-append-version="true" />
+</head>
+<body>
+ 
+    <div class="container" ng-controller="mainCtrl">
+        <main role="main" class="pb-3">
+          
+            @RenderBody()
+            {{trying}}
+        </main>
+    </div>
+
+    @* Main Libraries *@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/angular.js/angular.min.js"></script>
+
+
+
+    @*Modules*@
+    <script src="~/js/assets/mainModule.js" asp-append-version="true"></script>
+    <script src="~/js/assets/directives.js" asp-append-version="true"></script>
+    <script src="~/js/assets/services.js" asp-append-version="true"></script>
+    <script src="~/js/assets/factoryModal.js" asp-append-version="true"></script>
+
+    @*MainJS*@
+
+    <script src="~/js/pure.js" asp-append-version="true"></script>
+
+    @*Plugins*@
+    <script src="~/plugins/ui-bootstrap/ui-bootstrap.js" asp-append-version="true"></script>
+
+    @*Controllers*@
+    <script src="~/js/assets/controllers/MainController.js" asp-append-version="true"></script>
+    <script src="~/js/assets/controllers/modalController.js" asp-append-version="true"></script>
+
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34202.233
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FootballFieldManagmentAngularJS", "FootballFieldManagmentAngularJS\FootballFieldManagmentAngularJS.csproj", "{7BEF7F99-2E6B-4C11-ABE2-02EB32C6DF19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballFieldManagment.Core", "FootballFieldManagment.Core\FootballFieldManagment.Core.csproj", "{AD79D00B-E43A-4138-942F-B5206E3B2792}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballFieldManagment.Repository", "FootballFieldManagment.Repository\FootballFieldManagment.Repository.csproj", "{21BE2E79-DB58-4BF7-97D9-CDFBA6996D11}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballFieldManagment.Service", "FootballFieldManagment.Service\FootballFieldManagment.Service.csproj", "{37328123-A217-449A-9E45-74BC1E975326}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7BEF7F99-2E6B-4C11-ABE2-02EB32C6DF19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BEF7F99-2E6B-4C11-ABE2-02EB32C6DF19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BEF7F99-2E6B-4C11-ABE2-02EB32C6DF19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BEF7F99-2E6B-4C11-ABE2-02EB32C6DF19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD79D00B-E43A-4138-942F-B5206E3B2792}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD79D00B-E43A-4138-942F-B5206E3B2792}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD79D00B-E43A-4138-942F-B5206E3B2792}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD79D00B-E43A-4138-942F-B5206E3B2792}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21BE2E79-DB58-4BF7-97D9-CDFBA6996D11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21BE2E79-DB58-4BF7-97D9-CDFBA6996D11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21BE2E79-DB58-4BF7-97D9-CDFBA6996D11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21BE2E79-DB58-4BF7-97D9-CDFBA6996D11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37328123-A217-449A-9E45-74BC1E975326}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37328123-A217-449A-9E45-74BC1E975326}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37328123-A217-449A-9E45-74BC1E975326}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37328123-A217-449A-9E45-74BC1E975326}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {21AE3248-D172-4A1F-AC5B-ABEDDF49B5CC}
+	EndGlobalSection
+EndGlobal

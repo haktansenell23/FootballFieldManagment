@@ -1,0 +1,1 @@
+var factoryModal = angular.module("factoryModal", []);
