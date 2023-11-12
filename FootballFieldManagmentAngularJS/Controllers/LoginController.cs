@@ -8,8 +8,6 @@ namespace FootballFieldManagmentAngularJS.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-
-
             return View();
         }
 

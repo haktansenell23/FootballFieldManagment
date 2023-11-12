@@ -9,7 +9,9 @@ namespace FootballFieldManagment.Core.Entities
 {
     public class AppRole : IdentityRole
     {
-        
+        public DateTime CreatedDate { get; set; }
+        public DateTime UpdatedDate { get; set; } = DateTime.Now;
+        public bool isDeleted { get; set; } = false;
 
     }
 }
