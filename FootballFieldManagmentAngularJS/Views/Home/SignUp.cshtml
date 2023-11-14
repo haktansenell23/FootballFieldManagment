@@ -1,0 +1,75 @@
+﻿@{
+    ViewData["Title"] = "Üye Ol";
+}
+<style>
+    .bg-green {
+        background-color: #6fc276
+    }
+
+    .card-color {
+        background-color: #557C55;
+    }
+
+    body {
+        background-image: url(/projectImages/FootballField.jpg);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 60vh;
+        margin: 0;
+    }
+
+</style>
+
+<div ng-controller="signUpCtrl" style="opacity:1;width:20vw; height:30vh;">
+    <audio id="music" controls="controls" autoplay="autoplay" loop="loop" style="display:none;">
+        <source src="~/musics/uefa%20champions%20league%20anthem%20(full%20version).mp3" type="audio/mpeg" />
+    </audio>
+    <h3 class="text-white text-center mb-3">This is FMS</h3>
+    <div class="card  rounded-2 card-color border-5 border-white">
+        <div class="card-title mb-0 d-flex flex-row justify-content-center ">
+            <h3 class="text-center mt-2" style="color:antiquewhite">Üye Ol</h3>
+            <i id="sound-button" class="ms-2 bi bi-volume-down-fill float-right" style="font-size:28px; color:#ffff;" ng-click="changeStateSound()"></i>
+        </div>
+        <div class="card-body mt-0 pt-0" style="margin-top:0px !important;">
+            <form name="SignUp" method="post" ng-submit="ok()"> 
+                <div class="form-group">
+                    <label style="color:antiquewhite">Email :</label>
+                    <input ng-model="SignUpModel.Email" type="email" class="form-control border-0" required />
+                </div>
+                <div class="form-group">
+                    <label style="color:antiquewhite">Telefon Numarası :</label>
+                    <input ng-model="SignUpModel.PhoneNumber" type="text" class="form-control border-0" maxlength="11" required />
+                </div>
+                <div class="form-group">
+                    <label style="color:antiquewhite">Kullanıcı Adı :</label>
+                    <input ng-model="SignUpModel.UserName" type="text" class="form-control border-0" maxlength="30"  required />
+                </div>
+                <div class="form-group">
+                    <label style="color:antiquewhite">Şifre :</label>
+                    <input type="password" ng-model="SignUpModel.Password" class="form-control border-0" maxlength="30" required />
+                </div>
+                <div class="form-group">
+                    <label  style="color:antiquewhite">Şifre Tekrar :</label>
+                    <input type="password" ng-model="SignUpModel.RePassword" class="form-control border-0" required maxlength="30" />
+                </div>
+               
+                <div class="d-flex flex-row flex-wrap w-100 mt-2">
+                    <button class="form-control  btn-warning w-100" type="submit"   style="width:40%; color:antiquewhite">Üye Ol</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+

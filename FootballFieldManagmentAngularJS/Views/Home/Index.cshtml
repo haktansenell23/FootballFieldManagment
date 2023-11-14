@@ -1,8 +1,70 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Giriş Yap";
 }
+@model LoginViewModel
+<style>
+    .bg-green{
+        background-color: #6fc276
+    }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    .card-color{
+        background-color: #557C55;
+    }
+
+   body{
+        background-image: url(/projectImages/FootballField.jpg);
+        background-repeat:no-repeat;
+        background-size: 100% 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 60vh; 
+        margin: 0; 
+    }
+
+</style>
+
+<div ng-controller="loginCtrl">
+    <audio id="music" controls="controls" autoplay="autoplay" loop="loop" style="display:none;" >
+        <source src="~/musics/uefa%20champions%20league%20anthem%20(full%20version).mp3" type="audio/mpeg" />
+    </audio>
+    <div style="opacity:1;width:25vw; height:30vh;">
+        <h3 class="text-white text-center mb-3">This is FMS</h3>
+        <div class="card  rounded-2 card-color border-5 border-white">
+            <div class="card-title mb-0 w-100 d-flex justify-content-center">
+                <h3 class="text-center" style="color:antiquewhite">Giriş Yap</h3>
+                   <i id="sound-button" class="ms-2 bi bi-volume-down-fill" style="font-size:28px; color:#ffff;" ng-click="changeStateSound()"></i>
+            </div>
+            <div class="card-body mt-0 pt-0" style="margin-top:0px !important;">
+                <form name="Login" asp-controller="Home" asp-action="Index">
+                    <div class="form-group">
+                        <label asp-for="Email" style="color:antiquewhite">Email :</label>
+                        <input asp-for="Email" type="email" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password" style="color:antiquewhite">Şifre :</label>
+                        <input asp-for="Password" type="password" class="form-control" />
+                    </div>
+                    <div class="d-flex flex-row flex-wrap">
+                        <div class="w-50">
+                            <button class="form-control btn-primary  mt-2" type="submit" style="">
+                                Giriş Yap
+                                <i class="fa fa-solid  fa-arrow-alt-circle-right fa-bounce ms-2"></i>
+                            </button>
+                        </div>
+                        <div class="w-50">
+                            <a class="form-control btn  btn-warning  ms-2  mt-2 align-self-start text-white" ng-click="changeUri()" @* href="{{homeUri}}Home/SignUp" *@>Üye Ol</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+
+
+
+
+
+
+ 

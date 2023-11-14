@@ -6,19 +6,9 @@ namespace FootballFieldManagmentAngularJS.Controllers
     {
 
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult SignUp()
         {
             return View();
         }
-
-        //[HttpPost]  
-        //public IActionResult Login()
-        //{
-
-
-        //    return View();
-        //}
-
-
     }
 }

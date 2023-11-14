@@ -3,15 +3,24 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - FootballFieldManagmentAngularJS</title>
+    <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FootballFieldManagmentAngularJS.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/font-awesome/css/fontawesome.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/font-awesome/css/brands.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/font-awesome/css/regular.min.css" asp-append-version="true" />
+    <link href="~/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet" asp-append-version="true" />
 </head>
 <body>
  
-    <div class="container" ng-controller="mainCtrl">
-        <main role="main" class="pb-3">
+    <div class="" ng-controller="mainCtrl">
+        <main role="main" class="">
+            <div id="bg-spinner" ng-show="$mc.loading" class="" style="z-index:999">
+                <div class="spinner">
+                    <img style="width:4rem;z-index:1;" class="loading" src="/projectImages/championsLeagueBall.png" />
+                </div>
+            </div>            
             @RenderBody()
         </main>
     </div>
@@ -24,10 +33,10 @@
 
 
     @*Modules*@
-    <script src="~/js/assets/mainModule.js" asp-append-version="true"></script>
     <script src="~/js/assets/directives.js" asp-append-version="true"></script>
     <script src="~/js/assets/services.js" asp-append-version="true"></script>
     <script src="~/js/assets/factoryModal.js" asp-append-version="true"></script>
+    <script src="~/js/assets/mainModule.js" asp-append-version="true"></script>
 
     @*MainJS*@
 
@@ -35,12 +44,17 @@
 
     @*Plugins*@
     <script src="~/plugins/ui-bootstrap/ui-bootstrap.js" asp-append-version="true"></script>
-
+    <script src="~/plugins/sweetalert2/sweetalert2.all.min.js" asp-append-version="true"></script>
     @*Controllers*@
-    <script src="~/js/assets/controllers/MainController.js" asp-append-version="true"></script>
     <script src="~/js/assets/controllers/modalController.js" asp-append-version="true"></script>
+    <script src="~/js/assets/controllers/MainController.js" asp-append-version="true"></script>
 
 
     @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        var homeUri = '@Url.Content("~/")'+'/';
+    </script>
 </body>
+
+
 </html>
