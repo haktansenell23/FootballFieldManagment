@@ -16,7 +16,7 @@ namespace FootballFieldManagment.Core.Services
 
         public Task<List<T>> AddAllItem(List<T> items);
 
-        public Task  DeleteItem(Guid id);
+        public Task  DeleteItem(T item);
 
         public Task UpdateItem(T item);
     }

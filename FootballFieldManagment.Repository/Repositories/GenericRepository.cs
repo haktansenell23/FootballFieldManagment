@@ -1,7 +1,9 @@
 ﻿using FootballFieldManagment.Core.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,34 +11,58 @@ namespace FootballFieldManagment.Repository.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        public Task<List<T>> AddAllItem(List<T> items)
+        protected readonly AppDbContext appDbContext;
+
+        private readonly DbSet<T> _dbSet;
+
+        public GenericRepository(AppDbContext _appDbContext)
+        {
+            appDbContext = _appDbContext;
+            _dbSet=appDbContext.Set<T>();   
+        }
+
+        public async Task<List<T>> AddAllItem(List<T> items)
+        {
+            await _dbSet.AddRangeAsync(items);
+            return items;
+        }
+
+        public async Task<T> AddItem(T item)
+        {
+              await _dbSet.AddAsync(item); 
+              return item;
+        }
+
+        public Task<bool> AnyAsync(Expression<Func<T, bool>> expression)
         {
             throw new NotImplementedException();
         }
 
-        public Task<T> AddItem(T item)
+        public void DeleteItem(T entity)
         {
-            throw new NotImplementedException();
+            _dbSet.Remove(entity);
         }
 
-        public void DeleteItem(Guid id)
+        public async Task<List<T>> GetAllItems()
         {
-            throw new NotImplementedException();
+
+            return await _dbSet.ToListAsync();
         }
 
-        public Task<List<T>> GetAllItems()
+        public async Task<T> GetItem(Guid id)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<T> GetItem(Guid id)
-        {
-            throw new NotImplementedException();
+            return await _dbSet.FindAsync(id);
         }
 
         public void UpdateItem(T item)
         {
-            throw new NotImplementedException();
+              _dbSet.Update(item);  
+        }
+
+        public IQueryable Where(Expression<Func<T, bool>> expression)
+        {
+          return  _dbSet.Where(expression);
+
         }
     }
 }

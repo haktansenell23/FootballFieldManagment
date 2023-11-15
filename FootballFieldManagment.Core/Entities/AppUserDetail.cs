@@ -10,7 +10,6 @@ namespace FootballFieldManagment.Core.Entities
     {
         public Guid AppUserDetailID { get; set; }
         public AppUser AppUser { get; set; }
-        public Guid AppUserID { get; set; }
         public bool isDeleted { get; set; } = false;
         public int CreatedSessionCount { get; set; } = 0;
         public double PerGoalMatchCount { get; set; }

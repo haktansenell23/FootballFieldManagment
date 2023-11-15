@@ -37,6 +37,7 @@ mainCtrlModule.controller('mainCtrl', function ($scope, $rootScope,$timeout) {
 })
 
 
+
 mainCtrlModule.controller('loginCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
 
    var homeUri=$rootScope.$mc.domainUri
@@ -120,6 +121,9 @@ mainCtrlModule.controller('signUpCtrl', ['$scope', '$rootScope', 'NotifService',
         console.log("url--->", uri);
         var uri2 = "https://localhost:7182/Home/SignUp"
         $http.post(uri2, $scope.SignUpModel).then(function (resp) {
+          
+
+            
 
         })
 

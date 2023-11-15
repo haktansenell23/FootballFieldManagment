@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,9 +17,12 @@ namespace FootballFieldManagment.Core.Repositories
 
         public Task<List<T>>AddAllItem(List<T> items);
 
-        public void DeleteItem(Guid id);   
+        public void DeleteItem(T item);   
         
         public void UpdateItem(T item); 
-
+      
+        public IQueryable Where (Expression<Func<T, bool>> expression);
+        
+        public Task<bool> AnyAsync(Expression<Func<T, bool>> expression);   
     }
 }
