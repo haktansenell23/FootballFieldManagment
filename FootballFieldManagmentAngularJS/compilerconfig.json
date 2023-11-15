@@ -1,0 +1,14 @@
+﻿[
+  {
+    "outputFile": "wwwroot/js/assets/controllers/MainController.es5.js",
+    "inputFile": "wwwroot/js/assets/controllers/MainController.js"
+  },
+  {
+    "outputFile": "wwwroot/js/assets/controllers/modalController.es5.js",
+    "inputFile": "wwwroot/js/assets/controllers/modalController.js"
+  },
+  {
+    "outputFile": "wwwroot/js/assets/directives.es5.js",
+    "inputFile": "wwwroot/js/assets/directives.js"
+  }
+]

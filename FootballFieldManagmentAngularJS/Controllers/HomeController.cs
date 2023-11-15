@@ -8,17 +8,20 @@ using System.Diagnostics;
 
 namespace FootballFieldManagmentAngularJS.Controllers
 {
+   
+
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         private readonly UserManager<AppUser> _userManager;
-
         public HomeController(ILogger<HomeController> logger, UserManager<AppUser> userManager)
         {
             _logger = logger;
             _userManager = userManager;
         }
 
+        [HttpGet]
         public IActionResult Index()
         
         {
@@ -34,11 +37,12 @@ namespace FootballFieldManagmentAngularJS.Controllers
         {
             return View();
         }
+
+        [HttpGet]   
         public IActionResult SignUp() {
 
             return View();
         }
-
         [HttpPost]
         public async Task<IActionResult> SignUp([FromBody]SignUpViewModel SignUpModel)
         {
@@ -49,7 +53,7 @@ namespace FootballFieldManagmentAngularJS.Controllers
             }
 
             //var result = await  _userManager.CreateAsync(new() {UserName = SignUpModel.UserName,Email=SignUpModel.Email,PhoneNumber=SignUpModel.PhoneNumber},SignUpModel.RePassword);
-          
+
 
             //if (!result.Succeeded)
             //{
@@ -63,8 +67,8 @@ namespace FootballFieldManagmentAngularJS.Controllers
             //    return Json(new {title="İşleminiz başarısız",message=errorStr,buttonText="Oke",statu=false});
             //}
 
-
-            return RedirectToAction("Index","Home");
+            //return RedirectToAction("Index","Home");
+            return Json(new { title = "İşlem başarılı", message = "", buttonText = "Oke", statu = true });
         }
 
         public IActionResult Privacy()

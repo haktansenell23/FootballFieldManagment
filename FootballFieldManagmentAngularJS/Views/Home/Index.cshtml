@@ -25,9 +25,10 @@
 </style>
 
 <div ng-controller="loginCtrl">
-    <audio id="music" controls="controls" autoplay="autoplay" loop="loop" style="display:none;" >
+    <audio id="loginMusic" controls="controls" autoplay="autoplay"  loop="loop" ng-hide="true" allow="autoplay">
         <source src="~/musics/uefa%20champions%20league%20anthem%20(full%20version).mp3" type="audio/mpeg" />
     </audio>
+    <button ng-click="kk()" ng-show="hide"></button>
     <div style="opacity:1;width:25vw; height:30vh;">
         <h3 class="text-white text-center mb-3">This is FMS</h3>
         <div class="card  rounded-2 card-color border-5 border-white">
@@ -53,7 +54,7 @@
                             </button>
                         </div>
                         <div class="w-50">
-                            <a class="form-control btn  btn-warning  ms-2  mt-2 align-self-start text-white" ng-click="changeUri()" @* href="{{homeUri}}Home/SignUp" *@>Üye Ol</a>
+                            <a class="form-control btn  btn-warning  ms-2  mt-2 align-self-start text-white"  href="{{homeUri}}Home/SignUp">Üye Ol</a>
                         </div>
                     </div>
                 </form>
