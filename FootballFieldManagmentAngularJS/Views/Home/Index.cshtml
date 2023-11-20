@@ -25,26 +25,26 @@
 </style>
 
 <div ng-controller="loginCtrl">
-    <audio id="loginMusic" controls="controls" autoplay="autoplay"  loop="loop" ng-hide="true" allow="autoplay">
+    <audio id="loginMusic" controls="controls" autoplay="autoplay"  loop="loop" ng-hide="true" allow="autoplay" style="width:0px; height:0px;">
         <source src="~/musics/uefa%20champions%20league%20anthem%20(full%20version).mp3" type="audio/mpeg" />
     </audio>
     <button ng-click="kk()" ng-show="hide"></button>
     <div style="opacity:1;width:25vw; height:30vh;">
         <h3 class="text-white text-center mb-3">This is FMS</h3>
-        <div class="card  rounded-2 card-color border-5 border-white">
-            <div class="card-title mb-0 w-100 d-flex justify-content-center">
+        <div class="card  rounded-2 card-color border-5 border-white" ng-init="test='@ViewBag.Email'">
+            <div class="card-title mb-0 w-100 d-flex justify-content-center" ng-init=" password='@ViewBag.password'">
                 <h3 class="text-center" style="color:antiquewhite">Giriş Yap</h3>
                    <i id="sound-button" class="ms-2 bi bi-volume-down-fill" style="font-size:28px; color:#ffff;" ng-click="changeStateSound()"></i>
             </div>
             <div class="card-body mt-0 pt-0" style="margin-top:0px !important;">
-                <form name="Login" asp-controller="Home" asp-action="Index">
+                <form name="Login">
                     <div class="form-group">
-                        <label asp-for="Email" style="color:antiquewhite">Email :</label>
-                        <input asp-for="Email" type="email" class="form-control" />
+                        <label  style="color:antiquewhite">Email :</label>
+                        <input type="text" ng-model="test" class="form-control" />
                     </div>
                     <div class="form-group">
-                        <label asp-for="Password" style="color:antiquewhite">Şifre :</label>
-                        <input asp-for="Password" type="password" class="form-control" />
+                        <label  style="color:antiquewhite">Şifre :</label>
+                        <input  type="password" class="form-control" ng-model="password" />
                     </div>
                     <div class="d-flex flex-row flex-wrap">
                         <div class="w-50">

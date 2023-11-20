@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FootballFieldManagment.Repository
 {
-    public class AppDbContext : IdentityDbContext<AppUser, AppRole, string>
+    public class AppDbContext : IdentityDbContext<AppUser, AppRole,string>
     {
         public DbSet<AppUserDetail> AppUsersDetail { get; set; }
         public DbSet<Location> Locations { get; set; }
@@ -19,9 +19,6 @@ namespace FootballFieldManagment.Repository
         public DbSet<Session> Sessions { get; set; }
         public DbSet<Team> Teams { get; set; }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options){
-        
-    
-        
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

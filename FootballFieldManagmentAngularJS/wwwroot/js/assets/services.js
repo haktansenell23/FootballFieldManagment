@@ -5,8 +5,8 @@ services.factory('NotifService', function () {
     var root = {};
 
 
-    root.notification = function (title,message,buttonText,statu) {
-        Swal.fire({
+    root.notification = async function (title, message, buttonText, statu) {
+        await Swal.fire({
             title: title,
             html: message,
             icon: statu ? 'success' : 'warning',

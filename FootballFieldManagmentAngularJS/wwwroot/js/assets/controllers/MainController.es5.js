@@ -2,10 +2,11 @@
 
 var mainCtrlModule = angular.module("mainCtrlModule", []);
 
-mainCtrlModule.controller('mainCtrl', function ($scope, $rootScope, $timeout) {
+mainCtrlModule.controller('mainCtrl', function ($scope, $rootScope, $timeout, $interval) {
     $rootScope.$mc = {
         domainUri: '',
         loading: true
+
     };
 
     $rootScope.$watch("$mc.loading", function (newValue, oldValue) {
@@ -27,13 +28,6 @@ mainCtrlModule.controller('mainCtrl', function ($scope, $rootScope, $timeout) {
     });
 
     //$rootScope.$mc.domainUri = window.location.host;
-
-    $rootScope.$mc.domainUri = homeUri;
-    ;
-
-    console.log("$rootScope.$mc.domainUri ", $rootScope.$mc.domainUri);
-
-    $scope.trying = '12';
 });
 
 mainCtrlModule.controller('loginCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
@@ -49,6 +43,7 @@ mainCtrlModule.controller('loginCtrl', ['$scope', '$rootScope', function ($scope
             //audio.pause()
             audio.volume = 0;
             $scope.soundEnable = !$scope.soundEnable;
+            console.log("window.console", window.console);
         } else {
             $("#sound-button").removeClass("bi bi-volume-mute-fill");
             $("#sound-button").addClass("bi bi-volume-down-fill");
@@ -60,12 +55,12 @@ mainCtrlModule.controller('loginCtrl', ['$scope', '$rootScope', function ($scope
 
     angular.element(document).ready(function () {
         $scope.kk = function () {};
-
+        console.log("test", $scope.test);
         $scope.kk();
     });
 }]);
 
-mainCtrlModule.controller('signUpCtrl', ['$scope', '$rootScope', 'NotifService', '$http', function ($scope, $rootScope, NotifService, $http) {
+mainCtrlModule.controller('signUpCtrl', ['$scope', '$rootScope', 'NotifService', '$http', '$timeout', function ($scope, $rootScope, NotifService, $http, $timeout) {
 
     $scope.$ns = NotifService;
     $scope.loading = $rootScope.$mc.loading;
@@ -76,10 +71,9 @@ mainCtrlModule.controller('signUpCtrl', ['$scope', '$rootScope', 'NotifService',
         RePassword: '',
         Phone: ''
     };
-    $scope.homeUri = $rootScope.$mc.domainUri;
     $scope.soundEnable = true;
     $scope.changeStateSound = function () {
-        var audio = document.getElementById("music");
+        var audio = document.getElementById("signUpAudio");
         if ($scope.soundEnable) {
             $("#sound-button").removeClass("bi bi-volume-down-fill");
             $("#sound-button").addClass("bi bi-volume-mute-fill");
@@ -95,19 +89,24 @@ mainCtrlModule.controller('signUpCtrl', ['$scope', '$rootScope', 'NotifService',
             //audio.play();
         }
     };
+
     $scope.ok = function () {
-
         $scope.loading = true;
-
-        console.log("$scope.homeUri", $scope.homeUri);
-        var uri2 = $scope.homeUri + "Home/SignUp/";
-        $http.post(uri2, $scope.SignUpModel).then(function (resp) {
-            console.log("resp", resp);
+        var requestUri = homeUri + "Home/SignUp/";
+        $http.post(requestUri, $scope.SignUpModel).then(function (resp) {
             if (resp.data.statu) {
+
+                $scope.$ns.notification(resp.data.title, resp.data.message, resp.data.buttonText, resp.data.statu);
+
+                console.log("SignUpModel", $scope.SignUpModel);
+                $rootScope.$mc.login = {
+                    email: $scope.SignUpModel.email,
+                    password: $scope.SignUpModel.password
+                };
 
                 location.href = homeUri;
             } else {
-                location.href = homeUri;
+                $scope.$ns.notification(resp.data.title, resp.data.message, resp.data.buttonText, resp.data.statu);
             }
         })['catch'](function (error) {
 

@@ -12,25 +12,6 @@ namespace FootballFieldManagment.Repository.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "AppUsersDetail",
-                columns: table => new
-                {
-                    AppUserDetailID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    AppUserID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    isDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedSessionCount = table.Column<int>(type: "int", nullable: false),
-                    PerGoalMatchCount = table.Column<double>(type: "float", nullable: false),
-                    PerGoalAssistCount = table.Column<double>(type: "float", nullable: false),
-                    MatchCount = table.Column<int>(type: "int", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AppUsersDetail", x => x.AppUserDetailID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -45,6 +26,32 @@ namespace FootballFieldManagment.Repository.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUsers",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    isDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -82,39 +89,6 @@ namespace FootballFieldManagment.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetUsers",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    AppUserDetailID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    isDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AspNetUsers_AppUsersDetail_AppUserDetailID",
-                        column: x => x.AppUserDetailID,
-                        principalTable: "AppUsersDetail",
-                        principalColumn: "AppUserDetailID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -136,27 +110,27 @@ namespace FootballFieldManagment.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Teams",
+                name: "AppUsersDetail",
                 columns: table => new
                 {
-                    TeamID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TeamName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TeamDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TeamLogoPath = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SessionID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TeamCaptainID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AppUserDetailID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    AppUserID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     isDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedSessionCount = table.Column<int>(type: "int", nullable: false),
+                    PerGoalMatchCount = table.Column<double>(type: "float", nullable: false),
+                    PerGoalAssistCount = table.Column<double>(type: "float", nullable: false),
+                    MatchCount = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Teams", x => x.TeamID);
+                    table.PrimaryKey("PK_AppUsersDetail", x => x.AppUserDetailID);
                     table.ForeignKey(
-                        name: "FK_Teams_Sessions_SessionID",
-                        column: x => x.SessionID,
-                        principalTable: "Sessions",
-                        principalColumn: "SessionID",
+                        name: "FK_AppUsersDetail_AspNetUsers_AppUserID",
+                        column: x => x.AppUserID,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -246,6 +220,31 @@ namespace FootballFieldManagment.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Teams",
+                columns: table => new
+                {
+                    TeamID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TeamName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TeamDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TeamLogoPath = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SessionID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TeamCaptainID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    isDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Teams", x => x.TeamID);
+                    table.ForeignKey(
+                        name: "FK_Teams_Sessions_SessionID",
+                        column: x => x.SessionID,
+                        principalTable: "Sessions",
+                        principalColumn: "SessionID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Players",
                 columns: table => new
                 {
@@ -293,6 +292,12 @@ namespace FootballFieldManagment.Repository.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_AppUsersDetail_AppUserID",
+                table: "AppUsersDetail",
+                column: "AppUserID",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
                 column: "RoleId");
@@ -323,12 +328,6 @@ namespace FootballFieldManagment.Repository.Migrations
                 name: "EmailIndex",
                 table: "AspNetUsers",
                 column: "NormalizedEmail");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUsers_AppUserDetailID",
-                table: "AspNetUsers",
-                column: "AppUserDetailID",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
@@ -362,6 +361,9 @@ namespace FootballFieldManagment.Repository.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "AppUsersDetail");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
@@ -393,9 +395,6 @@ namespace FootballFieldManagment.Repository.Migrations
 
             migrationBuilder.DropTable(
                 name: "Teams");
-
-            migrationBuilder.DropTable(
-                name: "AppUsersDetail");
 
             migrationBuilder.DropTable(
                 name: "Sessions");

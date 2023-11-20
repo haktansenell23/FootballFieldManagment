@@ -66,9 +66,6 @@ namespace FootballFieldManagment.Repository.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("AppUserDetailID")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -118,9 +115,6 @@ namespace FootballFieldManagment.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppUserDetailID")
-                        .IsUnique();
-
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
 
@@ -137,6 +131,10 @@ namespace FootballFieldManagment.Repository.Migrations
                     b.Property<Guid>("AppUserDetailID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AppUserID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -160,6 +158,9 @@ namespace FootballFieldManagment.Repository.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("AppUserDetailID");
+
+                    b.HasIndex("AppUserID")
+                        .IsUnique();
 
                     b.ToTable("AppUsersDetail");
                 });
@@ -426,15 +427,15 @@ namespace FootballFieldManagment.Repository.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("FootballFieldManagment.Core.Entities.AppUser", b =>
+            modelBuilder.Entity("FootballFieldManagment.Core.Entities.AppUserDetail", b =>
                 {
-                    b.HasOne("FootballFieldManagment.Core.Entities.AppUserDetail", "AppUserDetail")
-                        .WithOne("AppUser")
-                        .HasForeignKey("FootballFieldManagment.Core.Entities.AppUser", "AppUserDetailID")
+                    b.HasOne("FootballFieldManagment.Core.Entities.AppUser", "AppUser")
+                        .WithOne("AppUserDetail")
+                        .HasForeignKey("FootballFieldManagment.Core.Entities.AppUserDetail", "AppUserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("AppUserDetail");
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("FootballFieldManagment.Core.Entities.Player", b =>
@@ -529,13 +530,10 @@ namespace FootballFieldManagment.Repository.Migrations
 
             modelBuilder.Entity("FootballFieldManagment.Core.Entities.AppUser", b =>
                 {
-                    b.Navigation("Player");
-                });
-
-            modelBuilder.Entity("FootballFieldManagment.Core.Entities.AppUserDetail", b =>
-                {
-                    b.Navigation("AppUser")
+                    b.Navigation("AppUserDetail")
                         .IsRequired();
+
+                    b.Navigation("Player");
                 });
 
             modelBuilder.Entity("FootballFieldManagment.Core.Entities.Player", b =>

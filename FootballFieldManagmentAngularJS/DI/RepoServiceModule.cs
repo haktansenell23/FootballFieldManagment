@@ -8,6 +8,7 @@
     using FootballFieldManagment.Repository.UnitOfWork;
     using FootballFieldManagment.Service.MapProfile;
     using FootballFieldManagment.Service.Services;
+    using FootballFieldManagmentAngularJS.Cache;
     using System.Reflection;
     using Module = Autofac.Module;
     public class RepoServiceModule : Module
@@ -16,8 +17,7 @@
         {
             builder.RegisterGeneric(typeof(GenericRepository<>)).As(typeof(IGenericRepository<>)).InstancePerLifetimeScope();
             builder.RegisterGeneric(typeof(GenericService<>)).As(typeof(IGenericService<>)).InstancePerLifetimeScope();
-
-            builder.RegisterType<UnitOfWork>().As<UnitOfWork>().InstancePerLifetimeScope(); 
+            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope(); 
 
             var activeDirectory = Assembly.GetExecutingAssembly(); 
 
