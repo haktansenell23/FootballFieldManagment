@@ -40,8 +40,9 @@ mainCtrlModule.controller('mainCtrl', function ($scope, $rootScope,$timeout,$int
 
 
 
-mainCtrlModule.controller('loginCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
+mainCtrlModule.controller('loginCtrl', ['$scope', '$rootScope','$http', function ($scope, $rootScope,$http) {
     $scope.loading = $rootScope.$mc.loading;
+    $scope.errors = "";
    var homeUri=$rootScope.$mc.domainUri
     $scope.soundEnable = false;
     $scope.changeStateSound = function () {
@@ -77,6 +78,29 @@ mainCtrlModule.controller('loginCtrl', ['$scope', '$rootScope', function ($scope
         $scope.kk();
 
     })
+
+    $scope.ok = function () {
+         
+        $scope.LoginViewModel = {
+            Email: $scope.email,
+            Password: $scope.password,
+            RememberMe: $scope.rememberMe
+        }
+        $http.post(homeUri + "Home/Index", $scope.LoginViewModel).then(function (resp) {
+
+            if (resp.data.statu == true) {
+
+                location.href = homeUri + "Main/Index";
+               
+            }
+
+            else {
+                $scope.errors = resp.data.message;
+            }
+            
+        })
+
+    }
 
 
 }])
@@ -142,9 +166,10 @@ mainCtrlModule.controller('signUpCtrl', ['$scope', '$rootScope', 'NotifService',
 
             console.error(error);
         })
-
-
-
     }
 
+
+    $scope.goToLoginPage = function () {
+        location.href = homeUri;
+    }
 }])

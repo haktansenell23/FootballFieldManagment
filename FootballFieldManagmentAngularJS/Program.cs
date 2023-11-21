@@ -4,6 +4,7 @@ using FootballFieldManagment.Core.Entities;
 using FootballFieldManagment.Repository;
 using FootballFieldManagmentAngularJS.Cache;
 using FootballFieldManagmentAngularJS.DI;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,18 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddSingleton<RedisService>(sp =>
 {
     return new RedisService(builder.Configuration["Redis:connectionString"]);
+});
+
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.AccessDeniedPath = "/Home/Index";
+    options.ExpireTimeSpan = TimeSpan.FromDays(30);
+    options.Cookie.Name = "FMCookie";
+    options.LoginPath = "/Main/Index";
+
+
+
 });
 
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -40,6 +53,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

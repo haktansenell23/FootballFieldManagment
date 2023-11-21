@@ -41,7 +41,7 @@
                 </div>
                 <div class="form-group">
                     <label style="color:antiquewhite">Telefon Numarası :</label>
-                    <input ng-model="SignUpModel.PhoneNumber" type="text" class="form-control border-0" maxlength="11" required />
+                    <input ng-model="SignUpModel.PhoneNumber" type="tel" class="form-control border-0" maxlength="11" required />
                 </div>
                 <div class="form-group">
                     <label style="color:antiquewhite">Kullanıcı Adı :</label>
@@ -58,6 +58,10 @@
                
                 <div class="d-flex flex-row flex-wrap w-100 mt-2">
                     <button class="form-control  btn-warning w-100" type="submit"   style="width:40%; color:antiquewhite">Üye Ol</button>
+                    <button class="btn btn-primary w-100 mt-2" ng-click="goToLoginPage()">
+                        Giriş Sayfasına git
+                        <span class="fa fa-home btn"></span> 
+                    </button>
                 </div>
 
             </form>

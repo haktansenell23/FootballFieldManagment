@@ -10,14 +10,14 @@ using System.Diagnostics;
 
 namespace FootballFieldManagmentAngularJS.Controllers
 {
-   
+
 
 
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
         private readonly UserManager<AppUser> _userManager;
-        private readonly SignInManager<AppUser> _signInManager; 
+        private readonly SignInManager<AppUser> _signInManager;
         private readonly IAppUserDetailService _appUserDetailService;
         private readonly RedisService _redisService;
 
@@ -31,25 +31,29 @@ namespace FootballFieldManagmentAngularJS.Controllers
         }
 
         [HttpGet]
-        public async  Task<IActionResult> Index()
-        
-       {
-
+        public async Task<IActionResult> Index()
+        {
             IDatabase db = _redisService.GetDb(0);
-
-           var password = await db.ListRightPopAsync("userCredential");
-           var email = await db.ListRightPopAsync("userCredential");
-   
-
-           ViewBag.Email = String.IsNullOrEmpty(email.ToString()) ? "" : email.ToString();
-           ViewBag.Password = String.IsNullOrEmpty(password.ToString()) ? "" : password.ToString();
-          
+            var email = await db.ListRightPopAsync("userCredential");
+            ViewBag.Email = String.IsNullOrEmpty(email.ToString()) ? "" : email.ToString();
             return View();
         }
         [HttpPost]
-        public IActionResult Index(LoginViewModel Login)
+        public async Task<IActionResult> Index([FromBody] LoginViewModel Login)
         {
-            return View();
+
+
+            var user = await _userManager.FindByEmailAsync(Login.Email);
+
+            if (user == null)
+            {
+                return Json(new { title = "", message = "Kullanıcı adı veya şifre yanlış", buttonText = "Tamam", statu = false });
+            }
+
+            var result = _signInManager.PasswordSignInAsync(user, Login.Password, true, false);
+
+
+            return Json(new { title = "İşlem başarılı", message = "", buttonText = "Tamam", statu = true });
         }
 
         [HttpGet]   
@@ -62,42 +66,69 @@ namespace FootballFieldManagmentAngularJS.Controllers
         {
 
             string errors = "";
-
             IDatabase db = _redisService.GetDb(0);
-
             List<string> usersInfo = new List<string>();
-
-            usersInfo.Add(SignUpModel.Email);
-            usersInfo.Add(SignUpModel.Password);
-
-
-
             foreach (var  item in usersInfo)
             {
-               await db.ListRightPushAsync("userCredential",item);
+                await db.ListRightPushAsync("userCredential", item);
             }
-
-
-
-
             if (SignUpModel.Password != SignUpModel.RePassword)
             {
-                return Json(new { title = "İşleminiz başarısız", message ="Şifreler uyuşmuyor<br/>", buttonText = "Oke", statu = false });
+                return Json(new { title = "İşleminiz başarısız", message ="Şifreler uyuşmuyor<br/>", buttonText = "Tamam", statu = false });
             }
-
             var appUser = new AppUser
             {
                 UserName = SignUpModel.UserName,
                 Email = SignUpModel.Email,  
                 PhoneNumber = SignUpModel.PhoneNumber
             };
-         var result =  await _userManager.CreateAsync(appUser,SignUpModel.Password);
+            var user  =   await  _userManager.FindByEmailAsync(SignUpModel.Email);
+            var userByUserName = await  _userManager.FindByNameAsync(SignUpModel.UserName);    
+            if (user != null)
+            {
+                string definitionErrors = "";
+                definitionErrors = "Bu email kullanılmaktadır" + definitionErrors + "<br/>";
+                definitionErrors = user.UserName == SignUpModel.UserName ? "Email veya kullanıcı adı sistemde bulunmaktadır" : definitionErrors;
+                return Json(new { title = "Hata !", message = definitionErrors, buttonText = "Tamam", statu = false });
+            }
 
+            if (userByUserName !=null)
+            {
+                string definitionErrors = "";
+                definitionErrors = "Bu kullanıcı adı kullanımdadır." + definitionErrors + "<br/>";
+
+                definitionErrors = userByUserName.UserName == SignUpModel.UserName ? "Kullanıcı adı kullanımdadır" : definitionErrors;
+
+                return Json(new { title = "Hata !", message = definitionErrors, buttonText = "Tamam", statu = false });
+            }
+
+
+            var result =  await _userManager.CreateAsync(appUser,SignUpModel.Email);
+
+          
+            
             if (result.Succeeded)
             {
                 usersInfo.Add(SignUpModel.Email);
-                usersInfo.Add(SignUpModel.Password);
-                return Json(new { title = "İşlem başarılı", message = "", buttonText = "Oke", statu = true });
+                await db.ListRightPushAsync("userCredential", usersInfo[0]);
+
+                AppUserDetail appUserDetail = new AppUserDetail
+                {
+
+                    AppUserDetailID = new Guid(),
+                    AppUserID = appUser.Id,
+                    CreatedDate = DateTime.Now,
+                    UpdatedDate = DateTime.Now,
+                    isDeleted = false,
+                    MatchCount = 0,
+                    PerGoalAssistCount = 0,
+                    CreatedSessionCount = 0,
+                    PerGoalMatchCount = 0,
+                };
+                await _appUserDetailService.AddItem(appUserDetail);
+
+
+                return Json(new { title = "İşlem başarılı", message = "İşlem Başarılı", buttonText = "Tamam", statu = true });
             }
 
 
@@ -109,7 +140,7 @@ namespace FootballFieldManagmentAngularJS.Controllers
                 }
 
 
-                return Json(new { title = "Hata !", message = errors, buttonText = "Oke", statu = false });
+                return Json(new { title = "Hata !", message = errors, buttonText = "Tamam", statu = false });
             }
 
 

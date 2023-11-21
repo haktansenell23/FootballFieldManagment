@@ -31,30 +31,37 @@
     <button ng-click="kk()" ng-show="hide"></button>
     <div style="opacity:1;width:25vw; height:30vh;">
         <h3 class="text-white text-center mb-3">This is FMS</h3>
-        <div class="card  rounded-2 card-color border-5 border-white" ng-init="test='@ViewBag.Email'">
-            <div class="card-title mb-0 w-100 d-flex justify-content-center" ng-init=" password='@ViewBag.password'">
+        <div class="card  rounded-2 card-color border-5 border-white" ng-init="email='@ViewBag.Email'">
+            <div class="card-title mb-0 w-100 d-flex justify-content-center">
                 <h3 class="text-center" style="color:antiquewhite">Giriş Yap</h3>
                    <i id="sound-button" class="ms-2 bi bi-volume-down-fill" style="font-size:28px; color:#ffff;" ng-click="changeStateSound()"></i>
             </div>
+            
             <div class="card-body mt-0 pt-0" style="margin-top:0px !important;">
-                <form name="Login">
+                <form name="Login" method="post" ng-submit="ok()">
                     <div class="form-group">
                         <label  style="color:antiquewhite">Email :</label>
-                        <input type="text" ng-model="test" class="form-control" />
+                        <input type="text" ng-model="email" class="form-control" />
+                        <div class="text-white" ng-if="errors!=''">{{errors}}</div>
                     </div>
                     <div class="form-group">
                         <label  style="color:antiquewhite">Şifre :</label>
                         <input  type="password" class="form-control" ng-model="password" />
+                        <div class="text-white" ng-if="errors!=''">{{errors}}</div>
                     </div>
-                    <div class="d-flex flex-row flex-wrap">
+                    <div class="d-flex flex-row justify-content-end">
+                        <label style="color:antiquewhite" class="me-2">Beni Hatırla</label>
+                        <input type="checkbox" class="" ng-model="rememberMe" style="width: 15px;height: 24px;" />
+                    </div>
+                    <div class="d-flex flex-row flex-wrap mt-2">
                         <div class="w-50">
-                            <button class="form-control btn-primary  mt-2" type="submit" style="">
+                            <button class="form-control btn-primary" type="submit" style="">
                                 Giriş Yap
-                                <i class="fa fa-solid  fa-arrow-alt-circle-right fa-bounce ms-2"></i>
+                                <i class="fa fa-solid fa-arrow-alt-circle-right fa-bounce "></i>
                             </button>
                         </div>
                         <div class="w-50">
-                            <a class="form-control btn  btn-warning  ms-2  mt-2 align-self-start text-white"  href="{{homeUri}}Home/SignUp">Üye Ol</a>
+                            <a class="form-control btn  btn-warning  ms-2 align-self-start text-white"  href="{{homeUri}}Home/SignUp">Üye Ol</a>
                         </div>
                     </div>
                 </form>
