@@ -33,15 +33,20 @@ namespace FootballFieldManagmentAngularJS.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+             
+
             IDatabase db = _redisService.GetDb(0);
             var email = await db.ListRightPopAsync("userCredential");
             ViewBag.Email = String.IsNullOrEmpty(email.ToString()) ? "" : email.ToString();
             return View();
         }
+
+
         [HttpPost]
-        public async Task<IActionResult> Index([FromBody] LoginViewModel Login)
+        public async Task<IActionResult> Index([FromBody] LoginViewModel Login,string? returnUrl=null)
         {
 
+            returnUrl = returnUrl ?? Url.Action("Index", "Home");
 
             var user = await _userManager.FindByEmailAsync(Login.Email);
 
@@ -50,10 +55,35 @@ namespace FootballFieldManagmentAngularJS.Controllers
                 return Json(new { title = "", message = "Kullanıcı adı veya şifre yanlış", buttonText = "Tamam", statu = false });
             }
 
-            var result = _signInManager.PasswordSignInAsync(user, Login.Password, true, false);
+            var result = await _signInManager.PasswordSignInAsync(user, Login.Password, Login.RememberMe, false);
+      
+
+            if (result.Succeeded)
+            {
+                return Json(new { title = "", message = "Kullanıcı adı veya şifre yanlış", buttonText = "Tamam", statu = true });
+            }
+            else if (result.IsLockedOut)
+            {
+                var lockoutEndUtc = await _userManager.GetLockoutEndDateAsync(user);
+                var timeLeft = lockoutEndUtc.Value - DateTime.UtcNow;
 
 
-            return Json(new { title = "İşlem başarılı", message = "", buttonText = "Tamam", statu = true });
+                return Json(new { title = "", message = $"Hesap {timeLeft} gün boyunca kapalı kalıcaktır. ", buttonText = "Tamam", statu = false });
+            }
+
+            else if (result.IsNotAllowed)
+            {
+                  var lockoutEndUtc = await _userManager.GetLockoutEndDateAsync(user);
+                var timeLeft = lockoutEndUtc.Value - DateTime.UtcNow;
+                return Json(new { title = "", message = $"Hesap {timeLeft} gün boyunca kapalı kalıcaktır. ", buttonText = "Tamam", statu = false });
+
+            }
+            else
+            {
+                
+                return Json(new { title = "İşlem başarılı", message = "", buttonText = "Tamam", statu = false });
+            }
+
         }
 
         [HttpGet]   
@@ -103,7 +133,7 @@ namespace FootballFieldManagmentAngularJS.Controllers
             }
 
 
-            var result =  await _userManager.CreateAsync(appUser,SignUpModel.Email);
+            var result =  await _userManager.CreateAsync(appUser,SignUpModel.Password);
 
           
             
@@ -127,7 +157,6 @@ namespace FootballFieldManagmentAngularJS.Controllers
                 };
                 await _appUserDetailService.AddItem(appUserDetail);
 
-
                 return Json(new { title = "İşlem başarılı", message = "İşlem Başarılı", buttonText = "Tamam", statu = true });
             }
 
@@ -146,6 +175,7 @@ namespace FootballFieldManagmentAngularJS.Controllers
 
 
         }
+
 
         public IActionResult Privacy()
         {

@@ -33,6 +33,8 @@ mainCtrlModule.controller('mainCtrl', function ($scope, $rootScope, $timeout, $i
 mainCtrlModule.controller('loginCtrl', ['$scope', '$rootScope', '$http', function ($scope, $rootScope, $http) {
     $scope.loading = $rootScope.$mc.loading;
     $scope.errors = "";
+    $scope.password = "";
+    $scope.haveRedBorder = false;
     var homeUri = $rootScope.$mc.domainUri;
     $scope.soundEnable = false;
     $scope.changeStateSound = function () {
@@ -44,7 +46,6 @@ mainCtrlModule.controller('loginCtrl', ['$scope', '$rootScope', '$http', functio
             //audio.pause()
             audio.volume = 0;
             $scope.soundEnable = !$scope.soundEnable;
-            console.log("window.console", window.console);
         } else {
             $("#sound-button").removeClass("bi bi-volume-mute-fill");
             $("#sound-button").addClass("bi bi-volume-down-fill");
@@ -74,6 +75,7 @@ mainCtrlModule.controller('loginCtrl', ['$scope', '$rootScope', '$http', functio
                 location.href = homeUri + "Main/Index";
             } else {
                 $scope.errors = resp.data.message;
+                $scope.haveRedBorder = true;
             }
         });
     };

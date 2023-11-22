@@ -5,7 +5,9 @@ using FootballFieldManagment.Repository;
 using FootballFieldManagmentAngularJS.Cache;
 using FootballFieldManagmentAngularJS.DI;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,23 +20,53 @@ builder.Services.AddSingleton<RedisService>(sp =>
 });
 
 
+
+
+
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.AccessDeniedPath = "/Home/Index";
     options.ExpireTimeSpan = TimeSpan.FromDays(30);
-    options.Cookie.Name = "FMCookie";
-    options.LoginPath = "/Main/Index";
-
-
-
+    options.Cookie = new CookieBuilder
+    {
+        Name = "FMSCookie",
+        HttpOnly = false,
+        SameSite = SameSiteMode.Lax,
+        SecurePolicy = CookieSecurePolicy.Always,
+    };
+    options.LoginPath = new PathString("/Home/Index");
+    options.AccessDeniedPath = new PathString("/Home/Index"); 
+    options.SlidingExpiration = true;
+    options.ExpireTimeSpan = TimeSpan.FromDays(30);
 });
+
+//builder.Services.AddSession(options =>
+//{
+//    options.IdleTimeout = TimeSpan.FromMinutes(30);
+//    options.Cookie.Name = "";
+//    options.Cookie.HttpOnly = true;
+//    options.Cookie.IsEssential = false;
+//    //options.Cookie.SameSite = SameSiteMode.None;
+//    //options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+//});
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"));
 });
 
-builder.Services.AddIdentity<AppUser,AppRole>().AddEntityFrameworkStores<AppDbContext>();   
+builder.Services.AddIdentity<AppUser,AppRole>().AddEntityFrameworkStores<AppDbContext>();
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+
+    options.Password.RequireDigit = false;  
+    options.Password.RequireUppercase = false;  
+    options.Password.RequireLowercase = false;  
+    options.Password.RequireNonAlphanumeric = true;  
+    options.Password.RequiredLength = 10;
+    //options.Lockout.AllowedForNewUsers = true;
+
+});
 
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
@@ -53,12 +85,12 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseAuthentication();
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Main}/{action=Index}");
 
 app.MapControllerRoute(
     name: "SignUp",

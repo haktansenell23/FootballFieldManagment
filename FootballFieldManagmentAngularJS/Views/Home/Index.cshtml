@@ -3,6 +3,11 @@
 }
 @model LoginViewModel
 <style>
+
+    .redBorder{
+       border : 1px outset red;
+    }
+
     .bg-green{
         background-color: #6fc276
     }
@@ -41,13 +46,12 @@
                 <form name="Login" method="post" ng-submit="ok()">
                     <div class="form-group">
                         <label  style="color:antiquewhite">Email :</label>
-                        <input type="text" ng-model="email" class="form-control" />
-                        <div class="text-white" ng-if="errors!=''">{{errors}}</div>
+                        <input type="text" ng-model="email" class="form-control" ng-class="{redBorder:haveRedBorder}" />
                     </div>
                     <div class="form-group">
                         <label  style="color:antiquewhite">Şifre :</label>
-                        <input  type="password" class="form-control" ng-model="password" />
-                        <div class="text-white" ng-if="errors!=''">{{errors}}</div>
+                        <input type="password" class="form-control" ng-model="password" ng-class="{redBorder:haveRedBorder}" />
+                        <div class="" style="color:red;" ng-if="errors!=''">{{errors}}</div>
                     </div>
                     <div class="d-flex flex-row justify-content-end">
                         <label style="color:antiquewhite" class="me-2">Beni Hatırla</label>
