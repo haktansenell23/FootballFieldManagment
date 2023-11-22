@@ -26,7 +26,10 @@ namespace FootballFieldManagmentAngularJS.Controllers
             var appUser1 = _signInManager.Context.User;
 
             var userId = appUser1.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-          
+
+            var userName = appUser1.FindFirst(ClaimTypes.Name)?.Value;
+
+            TempData["UserName"] = userName!=null ? userName : "";
 
 
             if (_signInManager.Context.Request.Cookies["FMSCookie"] == null)

@@ -3,13 +3,21 @@
 }
 <style>
     .navbar{
-        position:absolute;
+        position:sticky;
         margin:0;
         width:100vw;
-        background-color:darkolivegreen;
+        background-color: #5F6F52;
         color:wheat;
         display:flex;
-        justify-content:center;
+        justify-content:start;
+    }
+
+    .sidebar{
+        position:fixed;
+        left:0;
+        background: #A9B388;
+        width:10vw;
+        height:100vw;
     }
 
 </style>
@@ -17,20 +25,21 @@
 
 
 <div class="navbar">
- <div class="d-flex flex-column align-items-center">
-        <i class="fa fa-user fa-2x fa-solid d-flex flex-col">
+ <div class="d-flex flex-column align-items-center mt-3 ms-3">
+        <i class="fa fa-user fa-2x fa-solid d-flex flex-column">
         </i>
-        <i class="text-center" style="font-size:13px;">
-            Üyelik Bilgilerim
-        </i>
+        @if (TempData["UserName"] != null)
+        {
+            @TempData["UserName"].ToString();
+        }
  </div>
    
-
 </div>
+<div class="sidebar" style="overflow-y:hidden;">
+    <div class="d-flex justify-content-end">
+        <i class="fa fa-2x fa-solid fa-bars me-2 mt-1" style="color:wheat;"></i>
 
-
-<div class="sidebar">
-
+    </div>
 </div>
 
 
