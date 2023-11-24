@@ -13,5 +13,7 @@ namespace FootballFieldManagment.Core.Entities
         public AppUserDetail AppUserDetail { get; set; }
         public List<Player> Player { get; set; }
         public bool isDeleted { get; set; }
+
+        public string imagePath { get; set; }   
     }
 }

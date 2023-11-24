@@ -27,7 +27,10 @@ mainCtrlModule.controller('mainCtrl', function ($scope, $rootScope, $timeout, $i
         $rootScope.$mc.loading = true;
     });
 
-    //$rootScope.$mc.domainUri = window.location.host;
+    $rootScope.$mc.domainUri = window.location.host;
+
+    console.log(" $rootScope.$mc.domainUri", $rootScope.$mc.domainUri);
+    console.log(" homeUri", homeUri);
 });
 
 mainCtrlModule.controller('loginCtrl', ['$scope', '$rootScope', '$http', function ($scope, $rootScope, $http) {
@@ -35,7 +38,7 @@ mainCtrlModule.controller('loginCtrl', ['$scope', '$rootScope', '$http', functio
     $scope.errors = "";
     $scope.password = "";
     $scope.haveRedBorder = false;
-    var homeUri = $rootScope.$mc.domainUri;
+    $scope.homeUri = homeUri;
     $scope.soundEnable = false;
     $scope.changeStateSound = function () {
         var audio = document.getElementById("loginMusic");

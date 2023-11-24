@@ -2,47 +2,79 @@
     Layout = "_Layout";
 }
 <style>
-    .navbar{
-        position:sticky;
-        margin:0;
-        width:100vw;
-        background-color: #5F6F52;
-        color:wheat;
-        display:flex;
-        justify-content:start;
+    .customNavbar {
+        position: sticky;
+        margin: 0;
+        width: 100vw;
+        background-color: #010c7f;
+        color: wheat;
+        height:8vh;
+    }
+    .sidebar {
+        position: fixed;
+        left: 0;
+        background: #A9B388;
+        width: 13vw;
+        height: 94vh;
+        display: flex;
+        flex-direction: column;
+        color: #ffff;
+        overflow:hidden;
+    }
+        
+        .navbar a {
+            color: #FEFAE0;
+            font-size: 17px;
+        }
+        .window{
+        position: absolute;
+        height: 92vh;
+        width: 100vw;
+        background-color:aliceblue;
+    }
+    .barIcon {
+        margin-top:1px;
+        margin-left: 11vw;
+    }
+    #myIcon{
+        --animate-repeat:infinite;
+        --animate-delay: 100s;
+        --animate-duration: 15s;
     }
 
-    .sidebar{
-        position:fixed;
-        left:0;
-        background: #A9B388;
-        width:10vw;
-        height:100vw;
+    
+    #logo {
+        --animate-repeat: infinite;
+        --animate-delay: 100s;
+        --animate-duration: 15s;
     }
 
 </style>
 
 
+<div class="customNavbar d-flex justify-content-between" style="overflow:hidden;">
+    <div class="align-self-center  animate__animated  animate__repeat-1 animate__fadeInLeft" style="display:inline-block; padding-left:10rem;" id="myIcon">
+        <img src="~/projectimages/soccer-player.png" style="max-width:70px;" />
+    </div>
 
-<div class="navbar">
- <div class="d-flex flex-column align-items-center mt-3 ms-3">
+    <div class=" d-flex justify-content-center mt-3 w-100" >
+     
+        <a id="editProfile" class="btn sidebar-list" style="color:#FEFAE0;outline:none !important;outline-color:none !important;" href="/Profile/ProfileInformations">Profilimi düzenle</a>
+        <a id="editProfile" class="btn  sidebar-list" style="color:#FEFAE0">Gelecek Maçlarım</a>
+        <a id="editProfile" class="btn  sidebar-list" style="color:#FEFAE0;outline:none;outline-color:none !important;">Genel istatisliklerim</a>
+        <a id="" class="btn  sidebar-list" style="color:#FEFAE0; outline:none; outline-color:none !important;">Oturumlarım</a>
+        <a id="" class="btn sidebar-list" style="color:#FEFAE0; outline:none; outline-color:none !important;">Oturum Ara</a>
+        <a id="" class="btn sidebar-list" style="color:#FEFAE0; outline:none; outline-color:none !important;">Oturum Oluştur</a>
         <i class="fa fa-user fa-2x fa-solid d-flex flex-column">
         </i>
-        @if (TempData["UserName"] != null)
-        {
-            @TempData["UserName"].ToString();
-        }
- </div>
-   
-</div>
-<div class="sidebar" style="overflow-y:hidden;">
-    <div class="d-flex justify-content-end">
-        <i class="fa fa-2x fa-solid fa-bars me-2 mt-1" style="color:wheat;"></i>
-
+    </div>
+    <div id="logo" class="mt-2 w-25 animate__animated  animate__repeat-1 animate__fadeInLeft animate__fadeInRight">
+            <img  id="logo" src="~/projectimages/logo.png"  style="max-width:90px" />
     </div>
 </div>
 
-
 @RenderBody()
+<script>
 
+</script>
 

@@ -10,6 +10,7 @@
     <link href="~/font-awesome/css/all.min.css" rel="stylesheet" asp-append-version="true" />
     <link href="~/font-awesome/css/all.css" rel="stylesheet" asp-append-version="true" />
     <link href="~/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/animate.css" rel="stylesheet" asp-append-version="true"/>
 </head>
 <body style="overflow:hidden">
  
@@ -29,17 +30,11 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/angular.js/angular.min.js"></script>
-
-
-
     @*Modules*@
     <script src="~/js/assets/directives.js" asp-append-version="true"></script>
     <script src="~/js/assets/services.js" asp-append-version="true"></script>
     <script src="~/js/assets/factoryModal.js" asp-append-version="true"></script>
     <script src="~/js/assets/mainModule.js" asp-append-version="true"></script>
-
-  
-
     @*Plugins*@
     <script src="~/plugins/ui-bootstrap/ui-bootstrap.js" asp-append-version="true"></script>
     <script src="~/plugins/sweetalert2/sweetalert2.all.min.js" asp-append-version="true"></script>
@@ -47,15 +42,15 @@
     @*Controllers*@
     <script src="~/js/assets/controllers/modalController.js" asp-append-version="true"></script>
     <script src="~/js/assets/controllers/MainController.js" asp-append-version="true"></script>
-
+    <script src="~/js/assets/controllers/homecontroller.js" asp-append-version="true"></script>
     @*MainJS*@
     <script src="~/js/pure.js" asp-append-version="true"></script>
-
     @await RenderSectionAsync("Scripts", required: false)
     <script>
         var homeUri = '@Url.Content("~/")';
 
     </script>
+
 </body>
 
 

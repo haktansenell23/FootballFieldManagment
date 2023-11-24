@@ -1,0 +1,40 @@
+﻿@{
+    Layout = "MainLayout";
+}
+
+
+<style>
+    .imageStyle {
+        max-width: 29vw;
+    }
+</style>
+
+<div class="window" ng-contoller="ProfileCtrl">
+    <div class="d-flex flex-row">
+        <div>
+            <img src="~/projectimages/alex.jpg" style="max-width:40vw; height:100vh;">
+        </div>
+        <div class="ms-2 d-flex justify-content-center align-content-center w-100" style="height:100vh;">
+            <form class="p-5">
+
+                <div class="form-group">
+                    <img src="~/projectimages/alex.jpg" style="max-width:10vw;">
+                    <input type="file" class="form-control" />
+                </div>
+                <div class="form-group mt-2">
+                    <label>Kullanıcı Adı :</label>
+                    <input type="text" class="form-control" ng-disabled="true"/>
+
+                    <div class="form-group mt-2">
+                        <label>Telefon Numarası :</label>
+                        <input type="text" class="form-control" />
+
+                    </div>
+                 
+
+                </div>
+                <button type="submit" class="btn btn-primary mt-2 justify-content-end">Güncelle</button>
+            </form>
+        </div>
+    </div>
+</div>

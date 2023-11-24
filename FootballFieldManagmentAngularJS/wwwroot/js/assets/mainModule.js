@@ -1,5 +1,5 @@
 
-var module = angular.module("mainModule", ["mainCtrlModule", "directives", "factoryModal", "ui.bootstrap","services"]);
+var module = angular.module("mainModule", ["mainCtrlModule", "directives", "factoryModal", "ui.bootstrap", "services","homeCtrlModule"]);
 
 
 
