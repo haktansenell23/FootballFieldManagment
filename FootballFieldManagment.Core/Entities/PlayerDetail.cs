@@ -11,6 +11,9 @@ namespace FootballFieldManagment.Core.Entities
         public Guid PlayerDetailID { get; set; }
         public Player Player { get; set; }
         public Guid PlayerID { get; set; }
+
+        public Team Team { get; set; }
+
         public int AssistsCount { get; set; }
         public int GoalsCount { get; set; }
         public int CleanSheetCount { get; set; }

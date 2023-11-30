@@ -33,9 +33,10 @@ mainCtrlModule.controller('mainCtrl', function ($scope, $rootScope, $timeout, $i
     console.log(" homeUri", homeUri);
 });
 
-mainCtrlModule.controller('loginCtrl', ['$scope', '$rootScope', '$http', function ($scope, $rootScope, $http) {
+mainCtrlModule.controller('loginCtrl', ['$scope', '$rootScope', '$http', 'NotifService', function ($scope, $rootScope, $http, NotifService) {
     $scope.loading = $rootScope.$mc.loading;
     $scope.errors = "";
+    $scope.$ns = NotifService;
     $scope.password = "";
     $scope.haveRedBorder = false;
     $scope.homeUri = homeUri;
@@ -72,12 +73,14 @@ mainCtrlModule.controller('loginCtrl', ['$scope', '$rootScope', '$http', functio
             RememberMe: $scope.rememberMe
         };
         $http.post(homeUri + "Home/Index", $scope.LoginViewModel).then(function (resp) {
-
+            console.log("respdata", resp.data);
             if (resp.data.statu == true) {
 
                 location.href = homeUri + "Main/Index";
             } else {
-                $scope.errors = resp.data.message;
+
+                $scope.$ns.notification(resp.data.title, resp.data.message, resp.data.buttonText, resp.data.statu);
+
                 $scope.haveRedBorder = true;
             }
         });

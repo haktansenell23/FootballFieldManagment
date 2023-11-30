@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FootballFieldManagment.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,6 @@ namespace FootballFieldManagment.Service.MapProfile
     {
         public MapProfile()
         {
-               
         }
 
     }

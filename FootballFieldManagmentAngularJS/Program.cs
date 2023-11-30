@@ -4,9 +4,11 @@ using FootballFieldManagment.Core.Entities;
 using FootballFieldManagment.Repository;
 using FootballFieldManagmentAngularJS.Cache;
 using FootballFieldManagmentAngularJS.DI;
+using FootballFieldManagmentAngularJS.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Identity.Client;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -38,6 +40,7 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.SlidingExpiration = true;
     options.ExpireTimeSpan = TimeSpan.FromDays(30);
 });
+builder.Services.Configure<RapidApi>(builder.Configuration.GetSection("RapidApi"));
 
 //builder.Services.AddSession(options =>
 //{
@@ -55,6 +58,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 
 builder.Services.AddIdentity<AppUser,AppRole>().AddEntityFrameworkStores<AppDbContext>();
+
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
@@ -80,6 +84,16 @@ if (app.Environment.IsDevelopment())
     //app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
+
+var profileImages = builder.Configuration["userFiles:userProfileImages"];
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(profileImages)),
+   RequestPath = "/Profile"
+});
+
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

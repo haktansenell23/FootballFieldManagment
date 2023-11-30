@@ -1,6 +1,7 @@
 ﻿namespace FootballFieldManagmentAngularJS.DI
 {
     using Autofac;
+    using AutoMapper;
     using FootballFieldManagment.Core.Repositories;
     using FootballFieldManagment.Core.Services;
     using FootballFieldManagment.Repository;
@@ -19,7 +20,6 @@
             builder.RegisterGeneric(typeof(GenericService<>)).As(typeof(IGenericService<>)).InstancePerLifetimeScope();
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>().InstancePerLifetimeScope();
             builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>().InstancePerLifetimeScope();
-
             var activeDirectory = Assembly.GetExecutingAssembly(); 
 
            var repoAssembly = Assembly.GetAssembly(typeof(AppDbContext));

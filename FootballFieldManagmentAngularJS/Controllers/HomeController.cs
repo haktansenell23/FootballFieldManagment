@@ -29,35 +29,24 @@ namespace FootballFieldManagmentAngularJS.Controllers
             _appUserDetailService = appUserDetailService;
             _redisService = redisService;
         }
-
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-             
-
             IDatabase db = _redisService.GetDb(0);
             var email = await db.ListRightPopAsync("userCredential");
             ViewBag.Email = String.IsNullOrEmpty(email.ToString()) ? "" : email.ToString();
             return View();
         }
-
-
         [HttpPost]
         public async Task<IActionResult> Index([FromBody] LoginViewModel Login,string? returnUrl=null)
         {
-
             returnUrl = returnUrl ?? Url.Action("Index", "Home");
-
             var user = await _userManager.FindByEmailAsync(Login.Email);
-
             if (user == null)
             {
                 return Json(new { title = "", message = "Kullanıcı adı veya şifre yanlış", buttonText = "Tamam", statu = false });
             }
-
             var result = await _signInManager.PasswordSignInAsync(user, Login.Password, Login.RememberMe, false);
-      
-
             if (result.Succeeded)
             {
                 return Json(new { title = "", message = "Kullanıcı adı veya şifre yanlış", buttonText = "Tamam", statu = true });
@@ -80,12 +69,10 @@ namespace FootballFieldManagmentAngularJS.Controllers
             }
             else
             {
-                
-                return Json(new { title = "İşlem başarılı", message = "", buttonText = "Tamam", statu = false });
+                return Json(new { title = "Giriş Başarısız", message = "Kullanıcı adı veya şifre yanlış", buttonText = "Düzelticeğim", statu = false });
             }
 
         }
-
         [HttpGet]   
         public IActionResult SignUp() {
 
@@ -175,13 +162,10 @@ namespace FootballFieldManagmentAngularJS.Controllers
 
 
         }
-
-
         public IActionResult Privacy()
         {
             return View();
         }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

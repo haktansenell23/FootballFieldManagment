@@ -12,14 +12,10 @@ namespace FootballFieldManagmentAngularJS.Cache
             _connectionString = connectionString;
             _redis = ConnectionMultiplexer.Connect(_connectionString);
         }
-
-
         public IDatabase db { get; set; }   
-
         public IDatabase GetDb(int db)
         {
             return _redis.GetDatabase(db);  
         }
-
     }
 }

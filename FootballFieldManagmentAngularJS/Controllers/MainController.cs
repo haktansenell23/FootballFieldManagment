@@ -1,8 +1,10 @@
-﻿using FootballFieldManagment.Core.Entities;
+﻿using AutoMapper;
+using FootballFieldManagment.Core.Entities;
 using FootballFieldManagmentAngularJS.Attributes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections;
 using System.IdentityModel.Tokens.Jwt;
 using System.Runtime.InteropServices;
 using System.Security.Claims;
@@ -25,6 +27,10 @@ namespace FootballFieldManagmentAngularJS.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+
+
+            
+
             ViewBag.Title = "Ana sayfa";
             if (_signInManager.Context.Request.Cookies["FMSCookie"] == null)
             {
@@ -39,17 +45,12 @@ namespace FootballFieldManagmentAngularJS.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-
             return View();
         }
-
-
         [SessionAuth]
         public async Task<IActionResult> Logout()
         {
-
            await _signInManager.SignOutAsync();
-
             return RedirectToAction("Index", "Home");
         }
     }

@@ -2,14 +2,16 @@
     Layout = "_Layout";
 }
 <style>
+
     .customNavbar {
         position: sticky;
         margin: 0;
         width: 100vw;
-        background-color: #010c7f;
+        background-color: #000040;
         color: wheat;
-        height:8vh;
+        height: 8vh;
     }
+
     .sidebar {
         position: fixed;
         left: 0;
@@ -19,46 +21,49 @@
         display: flex;
         flex-direction: column;
         color: #ffff;
-        overflow:hidden;
+        overflow: hidden;
     }
-        
-        .navbar a {
-            color: #FEFAE0;
-            font-size: 17px;
-        }
-        .window{
+
+    .navbar a {
+        color: #FEFAE0;
+        font-size: 17px;
+    }
+
+    .window {
         position: absolute;
         height: 92vh;
         width: 100vw;
-        background-color:aliceblue;
-    }
-    .barIcon {
-        margin-top:1px;
-        margin-left: 11vw;
-    }
-    #myIcon{
-        --animate-repeat:infinite;
-        --animate-delay: 100s;
-        --animate-duration: 15s;
+        background-image: url(/projectImages/FootballField.jpg);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
     }
 
-    
-    #logo {
+    .barIcon {
+        margin-top: 1px;
+        margin-left: 11vw;
+    }
+
+    #myIcon {
         --animate-repeat: infinite;
         --animate-delay: 100s;
         --animate-duration: 15s;
     }
 
+    #logo {
+        --animate-repeat: infinite;
+        --animate-delay: 100s;
+        --animate-duration: 15s;
+    }
 </style>
 
 
-<div class="customNavbar d-flex justify-content-between" style="overflow:hidden;">
+<div class="customNavbar d-flex justify-content-between" style="overflow:hidden;" ng-controller="mainLayoutCtrl">
     <div class="align-self-center  animate__animated  animate__repeat-1 animate__fadeInLeft" style="display:inline-block; padding-left:10rem;" id="myIcon">
         <img src="~/projectimages/soccer-player.png" style="max-width:70px;" />
     </div>
 
-    <div class=" d-flex justify-content-center mt-3 w-100" >
-     
+    <div class=" d-flex justify-content-center mt-3 w-100">
+
         <a id="editProfile" class="btn sidebar-list" style="color:#FEFAE0;outline:none !important;outline-color:none !important;" href="/Profile/ProfileInformations">Profilimi düzenle</a>
         <a id="editProfile" class="btn  sidebar-list" style="color:#FEFAE0">Gelecek Maçlarım</a>
         <a id="editProfile" class="btn  sidebar-list" style="color:#FEFAE0;outline:none;outline-color:none !important;">Genel istatisliklerim</a>
@@ -69,7 +74,7 @@
         </i>
     </div>
     <div id="logo" class="mt-2 w-25 animate__animated  animate__repeat-1 animate__fadeInLeft animate__fadeInRight">
-            <img  id="logo" src="~/projectimages/logo.png"  style="max-width:90px" />
+        <img id="logo" src="~/projectimages/logo.png" style="max-width:90px" />
     </div>
 </div>
 

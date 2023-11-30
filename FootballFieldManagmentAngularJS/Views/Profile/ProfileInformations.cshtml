@@ -1,8 +1,6 @@
 ﻿@{
     Layout = "MainLayout";
 }
-
-
 <style>
     .imageStyle {
         max-width: 29vw;
@@ -11,29 +9,37 @@
 
 <div class="window" ng-contoller="ProfileCtrl">
     <div class="d-flex flex-row">
-        <div>
+     @*    <div>
             <img src="~/projectimages/alex.jpg" style="max-width:40vw; height:100vh;">
-        </div>
+        </div> *@
         <div class="ms-2 d-flex justify-content-center align-content-center w-100" style="height:100vh;">
             <form class="p-5">
 
-                <div class="form-group">
-                    <img src="~/projectimages/alex.jpg" style="max-width:10vw;">
-                    <input type="file" class="form-control" />
+                <div class="form-group text-center">
+                    <img src="~/projectimages/alex.jpg" class="rounded-circle text-center mb-3" style="max-width:5vw;">
+                    <input type="file" class="form-control " />
                 </div>
                 <div class="form-group mt-2">
-                    <label>Kullanıcı Adı :</label>
-                    <input type="text" class="form-control" ng-disabled="true"/>
-
-                    <div class="form-group mt-2">
-                        <label>Telefon Numarası :</label>
-                        <input type="text" class="form-control" />
-
-                    </div>
-                 
-
+                    <label class="text-white">Kullanıcı Adı :</label>
+                    <input type="text" class="form-control" ng-disabled="true" />
                 </div>
-                <button type="submit" class="btn btn-primary mt-2 justify-content-end">Güncelle</button>
+                <div class="form-group mt-2">
+                    <label class="text-white">Telefon Numarası :</label>
+                    <input type="text" class="form-control" />
+                </div>
+
+                <div class="form-group mt-2">
+                    <label class="text-white">Şifre:</label>
+                    <input type="password" class="form-control" />
+                </div>
+
+                <div class="form-group mt-2">
+                    <label class="text-white">Tekrar Şifre:</label>
+                    <input type="password" class="form-control" />
+                </div>
+                <div class="d-flex justify-content-end w-100">
+                    <button type="submit" class="btn mt-2 text-center w-100 text-black" style="background-color:whitesmoke">Güncelle</button>
+                </div>
             </form>
         </div>
     </div>
